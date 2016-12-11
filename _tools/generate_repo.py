@@ -142,8 +142,9 @@ class Generator:
         for addon in addons:
             # create path
             _path = os.path.join(addon, "addon.xml")
-            #skip path if it has no addon.xml
-            if not os.path.isfile(_path): continue
+            # skip path if it has no addon.xml
+            if not os.path.isfile(_path):
+                continue
             try:
                 # split lines for stripping
                 xml_lines = open(_path, "r").read().splitlines()
@@ -152,9 +153,10 @@ class Generator:
                 # loop thru cleaning each line
                 for line in xml_lines:
                     # skip encoding format line
-                    if (line.find("<?xml") >= 0): continue
+                    if (line.find("<?xml") >= 0):
+                        continue
                     # add line
-                    addon_xml += unicode(line.rstrip() + "\n", "utf-8")
+                    addon_xml += str(line.rstrip() + "\n")
                 # we succeeded so add to our final addons.xml text
                 addons_xml += addon_xml.rstrip() + "\n\n"
             except Exception as e:
